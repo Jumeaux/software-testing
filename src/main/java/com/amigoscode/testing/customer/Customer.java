@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-@JsonIgnoreProperties(value = {"id"},allowGetters = true)
+@JsonIgnoreProperties(allowGetters = true)
 public class Customer {
     
     @Id
@@ -45,6 +45,12 @@ public class Customer {
     }
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    @Override
+    public String toString() {
+        return "Customer [id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", getId()=" + getId()
+                + ", getName()=" + getName() + ", getPhoneNumber()=" + getPhoneNumber() + ", getClass()=" + getClass()
+                + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
     }
 
 

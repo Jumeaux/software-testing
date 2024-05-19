@@ -34,7 +34,6 @@ public class PaymentService {
 
         if (!optionalCustomer.isPresent()) {
             throw new IllegalStateException(String.format("Customer with ID  %s not found", costomerId));
-
         }
 
         // check if the currency is supported
@@ -45,7 +44,7 @@ public class PaymentService {
         }
 
         // charge card
-        CardPaymentCharge cardPaymentCharge = cardPaymentCharger.cardCharge(
+        CardPaymentCharge cardPaymentCharge = cardPaymentCharger.chargeCard(
                 paymentRequest.getPayment().getSource(),
                 paymentRequest.getPayment().getAmount(), 
                 paymentRequest.getPayment().getCurrency(),

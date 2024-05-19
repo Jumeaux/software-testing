@@ -1,6 +1,5 @@
 package com.amigoscode.testing.payment;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -14,7 +13,7 @@ public class Payment {
     @GeneratedValue
     private Long paymentId;
     private UUID customerId;
-    private BigDecimal amount;
+    private Long amount;
     private Currency currency;
 
     private String source;
@@ -24,7 +23,7 @@ public class Payment {
 
 
 
-    public Payment(Long paymentId, UUID customerId, BigDecimal amount, Currency currency, String source,
+    public Payment(Long paymentId, UUID customerId, Long amount, Currency currency, String source,
             String description) {
         this.paymentId = paymentId;
         this.customerId = customerId;
@@ -52,11 +51,11 @@ public class Payment {
         this.customerId = customerId;
     }
 
-    public BigDecimal getAmount() {
+    public Long getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Long amount) {
         this.amount = amount;
     }
 
@@ -97,6 +96,18 @@ public class Payment {
         result = prime * result + ((source == null) ? 0 : source.hashCode());
         result = prime * result + ((description == null) ? 0 : description.hashCode());
         return result;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Payment [paymentId=" + paymentId + ", customerId=" + customerId + ", amount=" + amount + ", currency="
+                + currency + ", source=" + source + ", description=" + description + ", getPaymentId()="
+                + getPaymentId() + ", getCustomerId()=" + getCustomerId() + ", getAmount()=" + getAmount()
+                + ", getCurrency()=" + getCurrency() + ", getClass()=" + getClass() + ", getSource()=" + getSource()
+                + ", getDescription()=" + getDescription() + ", hashCode()=" + hashCode() + ", toString()="
+                + super.toString() + "]";
     }
 
 

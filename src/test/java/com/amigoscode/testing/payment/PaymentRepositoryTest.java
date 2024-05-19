@@ -2,7 +2,6 @@ package com.amigoscode.testing.payment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ public class PaymentRepositoryTest {
     @Test
     void itShouldInsertPayment(){
         // Give
-        Payment payment= new Payment(1L,UUID.randomUUID(), new BigDecimal(1500),Currency.GNF,"0988e","Payment cours");
+        Payment payment= new Payment(1L,UUID.randomUUID(), 500L,Currency.GNF,"0988xxx","Payment cours");
 
         //When
         underTest.save(payment);

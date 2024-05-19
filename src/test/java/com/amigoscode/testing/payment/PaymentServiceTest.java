@@ -49,12 +49,12 @@ public class PaymentServiceTest {
         given(customerRepository.findById(customerId)).willReturn(Optional.of(mock(Customer.class)));
 
         //...Payment Request
-        Payment payment= new Payment(null, null, new BigDecimal(100), Currency.GNF, "0588xxx", "Payment cours");
+        Payment payment= new Payment(null, null, 1300L, Currency.GNF, "0588xxx", "Payment cours");
         PaymentRequest paymentRequest = new PaymentRequest(payment);
 
         //... card is charged successfully
         given(
-            cardPaymentCharger.cardCharge(
+            cardPaymentCharger.chargeCard(
                 paymentRequest.getPayment().getSource(),
                 paymentRequest.getPayment().getAmount(), 
                 paymentRequest.getPayment().getCurrency(),
@@ -86,12 +86,12 @@ public class PaymentServiceTest {
                 given(customerRepository.findById(customerId)).willReturn(Optional.of(mock(Customer.class)));
         
                 //...Payment Request
-                Payment payment= new Payment(null, null, new BigDecimal(100), Currency.GNF, "0588xxx", "Payment cours");
+                Payment payment= new Payment(null, null, 100L, Currency.GNF, "0588xxx", "Payment cours");
                 PaymentRequest paymentRequest = new PaymentRequest(payment);
         
                 //... card is not charged successfully
                 given(
-                    cardPaymentCharger.cardCharge(
+                    cardPaymentCharger.chargeCard(
                         paymentRequest.getPayment().getSource(),
                         paymentRequest.getPayment().getAmount(), 
                         paymentRequest.getPayment().getCurrency(),
@@ -121,7 +121,7 @@ public class PaymentServiceTest {
         given(customerRepository.findById(customerId)).willReturn(Optional.of(mock(Customer.class)));
 
         //...Payment Request
-        Payment payment= new Payment(null, null, new BigDecimal(100), Currency.XOF, "0588xxx", "Payment cours");
+        Payment payment= new Payment(null, null, 200L, Currency.XOF, "0588xxx", "Payment cours");
         PaymentRequest paymentRequest = new PaymentRequest(payment);
 
 
