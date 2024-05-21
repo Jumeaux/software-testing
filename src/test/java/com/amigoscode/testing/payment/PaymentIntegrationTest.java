@@ -36,7 +36,7 @@ class PaymentIntegrationTest {
 
         //Given a customer
         UUID customerId=UUID.randomUUID();
-        Customer customer= new Customer(customerId, "Sidi", "00224");
+        Customer customer= new Customer(customerId, "Sidi", "+224625768833");
         CustomerRegistrationRequest customerRequest=new CustomerRegistrationRequest(customer);
 
         //... Request to register new Customer

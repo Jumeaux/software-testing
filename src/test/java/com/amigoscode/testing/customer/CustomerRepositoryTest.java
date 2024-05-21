@@ -38,8 +38,8 @@ public class CustomerRepositoryTest {
         assertThat(optionalCustomer).isPresent()
         .hasValueSatisfying( c ->{
 
-           // assertThat(c).isEqualTo(customer);
-            assertThat(c).isEqualToComparingFieldByField(customer);
+            assertThat(c).isEqualTo(customer);
+           // assertThat(c).isEqualToComparingFieldByField(customer);
 
         });
     }
