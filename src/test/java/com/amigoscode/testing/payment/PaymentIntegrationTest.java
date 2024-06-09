@@ -26,9 +26,9 @@ import com.amigoscode.testing.customer.CustomerRegistrationRequest;
 import com.amigoscode.testing.payment.twilio.MessageDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.Message.Status;
-import com.twilio.type.PhoneNumber;
+
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class PaymentIntegrationTest {
