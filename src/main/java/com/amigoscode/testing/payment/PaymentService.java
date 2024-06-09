@@ -1,11 +1,9 @@
 package com.amigoscode.testing.payment;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.propertyeditors.CurrencyEditor;
 import org.springframework.stereotype.Service;
 
 import com.amigoscode.testing.customer.Customer;

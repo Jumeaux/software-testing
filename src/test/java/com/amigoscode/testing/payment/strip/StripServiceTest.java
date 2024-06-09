@@ -1,12 +1,10 @@
 package com.amigoscode.testing.payment.strip;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
-import java.math.BigDecimal;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +14,6 @@ import org.mockito.MockitoAnnotations;
 
 import com.amigoscode.testing.payment.CardPaymentCharge;
 import com.amigoscode.testing.payment.Currency;
-import com.amigoscode.testing.payment.strip.StripApi;
-import com.amigoscode.testing.payment.strip.StripService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.net.RequestOptions;

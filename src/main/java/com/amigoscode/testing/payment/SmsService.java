@@ -1,7 +1,6 @@
 package com.amigoscode.testing.payment;
 
 import com.amigoscode.testing.payment.twilio.MessageDTO;
-import com.twilio.rest.api.v2010.account.Message;
 
 public interface SmsService {
     
