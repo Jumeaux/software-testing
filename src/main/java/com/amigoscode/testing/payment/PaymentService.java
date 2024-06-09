@@ -18,13 +18,16 @@ public class PaymentService {
     private final CustomerRepository customerRepository;
     private final CardPaymentCharger cardPaymentCharger;
 
+    private final SmsService smsService ;
+
    private final static List<Currency> ACCEPTED_CURRENCIES = List.of(Currency.EUR, Currency.GNF, Currency.USD);
 
     public PaymentService(PaymentRepository paymentRepository, CustomerRepository customerRepository,
-            CardPaymentCharger cardPaymentCharger) {
+            CardPaymentCharger cardPaymentCharger,  SmsService smsService) {
         this.paymentRepository = paymentRepository;
         this.customerRepository = customerRepository;
         this.cardPaymentCharger = cardPaymentCharger;
+        this.smsService=smsService;
     }
 
     void chargeCard(UUID costomerId, PaymentRequest paymentRequest) {
@@ -60,6 +63,8 @@ public class PaymentService {
         paymentRepository.save(paymentRequest.getPayment());
 
         // send SMS
+        smsService.send(optionalCustomer.get().getPhoneNumber(), "62599000", paymentRequest.getPayment().getDescription());
 
+      
     }
 }

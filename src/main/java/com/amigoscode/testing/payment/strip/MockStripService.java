@@ -1,6 +1,5 @@
 package com.amigoscode.testing.payment.strip;
 
-import java.math.BigDecimal;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,6 @@ import com.amigoscode.testing.payment.Currency;
 
 @Service
 @ConditionalOnProperty(
-    
     value = "strip.enabled",
     havingValue = "false"
 )

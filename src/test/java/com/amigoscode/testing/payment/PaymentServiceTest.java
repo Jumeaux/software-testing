@@ -31,13 +31,16 @@ public class PaymentServiceTest {
     @Mock
     private CardPaymentCharger cardPaymentCharger;
 
+    @Mock
+    private SmsService smsService ;
+
     private PaymentService underTest;
 
     @BeforeEach
     void setUp(){
 
         MockitoAnnotations.initMocks(this);
-        underTest= new PaymentService(paymentRepository, customerRepository, cardPaymentCharger);
+        underTest= new PaymentService(paymentRepository, customerRepository, cardPaymentCharger,smsService);
     }
 
     @Test
@@ -74,7 +77,6 @@ public class PaymentServiceTest {
         assertThat(paymentArgumentCaptorValue).isEqualToIgnoringGivenFields(paymentRequest.getPayment(), "customerId");
 
         assertThat(paymentArgumentCaptorValue.getCustomerId()).isEqualTo(customerId);
-
     }
     
     

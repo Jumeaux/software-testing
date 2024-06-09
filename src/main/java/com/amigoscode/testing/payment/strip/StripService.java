@@ -1,6 +1,5 @@
 package com.amigoscode.testing.payment.strip;
 
-import java.math.BigDecimal;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -10,7 +9,6 @@ import com.amigoscode.testing.payment.CardPaymentCharger;
 import com.amigoscode.testing.payment.Currency;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
-import com.stripe.net.ApiService;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.ChargeCreateParams;
 
