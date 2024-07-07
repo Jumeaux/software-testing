@@ -172,8 +172,8 @@ public class PaymentServiceTest {
         // Give
         UUID customerId=UUID.randomUUID();
 
-        Payment payment = new Payment(1L, customerId, new BigDecimal(500), Currency.GNF, "3xx...x4", "cours Software Testing");
-        Payment payment1 = new Payment(1L, customerId, new BigDecimal(500), Currency.GNF, "3xx...x455", "cours Software ");
+        Payment payment = new Payment(1L, customerId, 200L, Currency.GNF, "3xx...x4", "cours Software Testing");
+        Payment payment1 = new Payment(1L, customerId, 500L, Currency.GNF, "3xx...x455", "cours Software ");
        
         given(paymentRepository.findPaymentByCustomer(customerId)).willReturn(Arrays.asList(payment, payment1));
 

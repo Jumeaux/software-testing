@@ -41,7 +41,7 @@ public class PaymentRepositoryTest {
         // Give
 
         UUID customerId=UUID.randomUUID();
-        Payment payment= new Payment(1L,customerId, new BigDecimal(1500),Currency.GNF,"0988e","Payment cours");
+        Payment payment= new Payment(1L,customerId, 1500L,Currency.GNF,"0988e","Payment cours");
 
         //When
         underTest.save(payment);
