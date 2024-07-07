@@ -11,13 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping("api/customer-registration")
+@RequestMapping("/api/customer-registration")
 public class CustomerRegistrationController {
-    
+    private final CustomerRegistrationService customerRegistrationService;
+
+  public CustomerRegistrationController(CustomerRegistrationService customerRegistrationService){
+    this.customerRegistrationService=customerRegistrationService;
+  }
 
     @PutMapping
     public void registerNewCustomer(
-      @Valid @RequestBody CustomerRegistrationRequest customerRegistrationController){
+      @Valid @RequestBody CustomerRegistrationRequest customerRegistrationRequest){
 
+
+        customerRegistrationService.registerNewCustomer(customerRegistrationRequest);
     }
 }

@@ -1,11 +1,9 @@
 package com.amigoscode.testing.payment;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.beans.propertyeditors.CurrencyEditor;
 import org.springframework.stereotype.Service;
 
 import com.amigoscode.testing.customer.Customer;
@@ -18,13 +16,16 @@ public class PaymentService {
     private final CustomerRepository customerRepository;
     private final CardPaymentCharger cardPaymentCharger;
 
+    private final SmsService smsService ;
+
    private final static List<Currency> ACCEPTED_CURRENCIES = List.of(Currency.EUR, Currency.GNF, Currency.USD);
 
     public PaymentService(PaymentRepository paymentRepository, CustomerRepository customerRepository,
-            CardPaymentCharger cardPaymentCharger) {
+            CardPaymentCharger cardPaymentCharger,  SmsService smsService) {
         this.paymentRepository = paymentRepository;
         this.customerRepository = customerRepository;
         this.cardPaymentCharger = cardPaymentCharger;
+        this.smsService=smsService;
     }
 
     void chargeCard(UUID costomerId, PaymentRequest paymentRequest) {
@@ -34,7 +35,6 @@ public class PaymentService {
 
         if (!optionalCustomer.isPresent()) {
             throw new IllegalStateException(String.format("Customer with ID  %s not found", costomerId));
-
         }
 
         // check if the currency is supported
@@ -45,7 +45,7 @@ public class PaymentService {
         }
 
         // charge card
-        CardPaymentCharge cardPaymentCharge = cardPaymentCharger.cardCharge(
+        CardPaymentCharge cardPaymentCharge = cardPaymentCharger.chargeCard(
                 paymentRequest.getPayment().getSource(),
                 paymentRequest.getPayment().getAmount(), 
                 paymentRequest.getPayment().getCurrency(),
@@ -61,7 +61,9 @@ public class PaymentService {
         paymentRepository.save(paymentRequest.getPayment());
 
         // send SMS
+        smsService.send(optionalCustomer.get().getPhoneNumber(), "62599000", paymentRequest.getPayment().getDescription());
 
+      
     }
 
 
