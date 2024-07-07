@@ -6,7 +6,12 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
 
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -158,6 +163,57 @@ public class PaymentServiceTest {
 
         //..  No interaction with paymentRepository
         then(paymentRepository).shouldHaveNoInteractions();
+    }
+
+
+    @Test
+    void itShouldFindPaymentByCustomer(){
+        // Give
+        UUID customerId=UUID.randomUUID();
+
+        Payment payment = new Payment(1L, customerId, new BigDecimal(500), Currency.GNF, "3xx...x4", "cours Software Testing");
+        Payment payment1 = new Payment(1L, customerId, new BigDecimal(500), Currency.GNF, "3xx...x455", "cours Software ");
+       
+        given(paymentRepository.findPaymentByCustomer(customerId)).willReturn(Arrays.asList(payment, payment1));
+
+        // When
+        List<Payment> payments=underTest.getPaymentByCustomer(customerId);
+
+        //Then
+        assertThat(payments).isNotEmpty();
+        assertThat(payments.size()).isEqualTo(2);
+        assertThat(payments.get(0)).isEqualTo(payment);
+    }
+
+
+    @Test
+    void itShouldThrownWhenCustomerIdIsNull(){
+        // Give
+        UUID customerId=null;
+
+        // When
+        assertThatThrownBy(()->underTest.getPaymentByCustomer(customerId)
+        ).isInstanceOf(IllegalStateException.class).hasMessageContaining ("Customer ID is null");
+       
+        //Finally
+        then(paymentRepository).shouldHaveNoInteractions();
+       
+    }
+
+
+    @Test
+    void itShouldThrownWhenPaymentNotFoundByCustomer(){
+        // Give
+        UUID customerId=UUID.randomUUID();
+
+        // ..Payments not found
+        given(paymentRepository.findPaymentByCustomer(customerId)).willReturn(new ArrayList<Payment>());
+
+        // When
+        assertThatThrownBy(()->underTest.getPaymentByCustomer(customerId)
+        ).isInstanceOf(IllegalStateException.class).hasMessageContaining (String.format("Payment not found for the customer %s", customerId));
+       
+       
     }
 
 

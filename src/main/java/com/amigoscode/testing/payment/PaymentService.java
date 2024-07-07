@@ -65,4 +65,20 @@ public class PaymentService {
 
       
     }
+
+
+
+    public List<Payment> getPaymentByCustomer(UUID customerId){
+
+        if (customerId==null) {
+            throw new IllegalStateException("Customer ID is null");
+        }
+
+        List<Payment> payments= paymentRepository.findPaymentByCustomer(customerId);
+        if (payments.isEmpty()) {
+            throw new IllegalStateException(String.format("Payment not found for the customer %s", customerId)); 
+        }
+
+        return payments;
+    }
 }
